@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.gyuchul.space/sitemap.xml
+Sitemap: https://gyu-chul.github.io/sitemap.xml
