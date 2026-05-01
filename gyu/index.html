@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GYU | GYUCHUL</title>
+  <meta name="description" content="GYU - System Software Engineer @ GYUCHUL. 백엔드 시스템 설계와 핵심 로직 구현">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="GYU | GYUCHUL">
+  <meta property="og:description" content="GYU - System Software Engineer @ GYUCHUL. 백엔드 시스템 설계와 핵심 로직 구현">
+  <meta property="og:locale" content="ko_KR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #050505;
+      --white: #f0f0f0;
+      --accent: #ff2d2d;
+      --accent2: #00f0ff;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      padding: 1rem;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .back-arrow { font-size: 1.2rem; }
+
+    .profile-hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 25% 20%;
+      filter: grayscale(60%) brightness(0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 5rem;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .profile-card {
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .profile-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 15vw, 14rem);
+      line-height: 0.85;
+      margin-bottom: 1rem;
+    }
+
+    .profile-role {
+      font-size: 1rem;
+      letter-spacing: 0.4em;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    .profile-bio {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      opacity: 0.8;
+      margin-bottom: 3rem;
+    }
+
+    .profile-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .blog-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 2.5rem;
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: not-allowed;
+    }
+
+    .about-section {
+      padding: 8rem 5rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .about-block {
+      padding: 3rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .block-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .career-list, .achievements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .career-item, .achievement-item {
+      display: flex;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .career-item:last-child, .achievement-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .career-period {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+      min-width: 120px;
+    }
+
+    .career-info h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .career-info p {
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    .achievement-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      opacity: 0.3;
+      min-width: 60px;
+    }
+
+    .achievement-info h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .achievement-info p {
+      font-size: 0.85rem;
+      opacity: 0.5;
+      line-height: 1.6;
+    }
+
+    .award-badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+    }
+
+    .award-badge.gold {
+      background: linear-gradient(135deg, #ffd700, #ffb700);
+      color: #000;
+    }
+
+    .award-badge.silver {
+      background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
+      color: #000;
+    }
+
+    .award-badge.bronze {
+      background: linear-gradient(135deg, #cd7f32, #b87333);
+      color: #fff;
+    }
+
+    .stack-section {
+      margin-top: 5rem;
+      padding-top: 5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stack-header { margin-bottom: 3rem; }
+    .stack-header .block-title { margin-bottom: 1.5rem; }
+
+    .stack-philosophy {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.7;
+      font-style: italic;
+      max-width: 700px;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .stack-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stack-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.3s;
+    }
+
+    .stack-card:hover::before { transform: scaleY(1); }
+
+    .stack-card:hover {
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-5px);
+    }
+
+    .stack-card.main {
+      grid-column: span 2;
+      background: rgba(255,45,45,0.05);
+      border-color: rgba(255,45,45,0.3);
+    }
+
+    .stack-card.main::before { transform: scaleY(1); }
+
+    .stack-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .stack-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .stack-badge {
+      padding: 0.3rem 0.8rem;
+      background: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .stack-tagline {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .stack-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      opacity: 0.7;
+    }
+
+    footer {
+      padding: 3rem 5rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .profile-hero { justify-content: flex-start; }
+      .hero-content { padding: 2rem; justify-content: flex-start; }
+      .profile-card { text-align: left; }
+      .profile-links { justify-content: flex-start; }
+
+      .about-section { padding: 4rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-block { padding: 2rem; }
+
+      .career-item, .achievement-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .stack-grid { grid-template-columns: 1fr; }
+      .stack-card.main { grid-column: span 1; }
+      .stack-philosophy { font-size: 1rem; }
+
+      .back-btn { top: 1rem; left: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-btn">
+    <span class="back-arrow">←</span>
+    <span>BACK</span>
+  </a>
+
+  <section class="profile-hero">
+    <div class="hero-bg">
+      <img src="/images/team-2.jpg" alt="Gyu">
+    </div>
+    <div class="hero-content">
+      <div class="profile-card">
+        <h1 class="profile-name">GYU</h1>
+        <p class="profile-role">SYSTEM SOFTWARE ENGINEER</p>
+        <p class="profile-bio">
+          백엔드 시스템 설계와 핵심 로직 구현을 담당합니다.<br>
+          확장 가능한 아키텍처 위에서 극한의 효율을 집요하게 파고듭니다.<br>
+          소프트웨어의 무게는 덜어내고 코어 성능은 극대화하여,<br>
+          기술적으로 가장 완벽한 코드를 완성하는 것을 목표로 합니다.
+        </p>
+        <div class="profile-links">
+          <span class="blog-link">
+            <span>BLOG COMING SOON</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="about-grid">
+      <div class="about-block">
+        <h2 class="block-title">CAREER</h2>
+        <div class="career-list">
+          <div class="career-item">
+            <span class="career-period">2021 - 2022</span>
+            <div class="career-info">
+              <h3>Ninementoring Academy</h3>
+              <p>Mathematics Instructor</p>
+            </div>
+          </div>
+          <div class="career-item">
+            <span class="career-period">2020 - Present</span>
+            <div class="career-info">
+              <h3>고려대학교</h3>
+              <p>전기전자공학부</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-block">
+        <h2 class="block-title">ACHIEVEMENTS</h2>
+        <div class="achievements-list">
+          <div class="achievement-item">
+            <span class="achievement-year">2025</span>
+            <div class="achievement-info">
+              <h3>오픈소스 개발자대회 <span class="award-badge bronze">동상</span></h3>
+              <p>과학기술정보통신부 주최 · 정보통신산업진흥원 주관</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-section">
+      <div class="stack-header">
+        <h2 class="block-title">ENGINEERING STACK</h2>
+        <p class="stack-philosophy">
+          "언어는 도구일 뿐이지만, 도구의 본질을 꿰뚫는 것이 진정한 엔지니어입니다.<br>
+          C/C++을 주력으로, 성능의 한계를 끊임없이 밀어붙입니다."
+        </p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-card main">
+          <div class="stack-card-header">
+            <span class="stack-name">C/C++</span>
+            <span class="stack-badge">MAIN</span>
+          </div>
+          <span class="stack-tagline">High Performance & System Core</span>
+          <p class="stack-desc">
+            소프트웨어의 극한 성능을 이끌어내는 메인 언어입니다. 어플리케이션 레벨의 코드를 로우 레벨 관점에서 분석하여 병목 구간을 찾아내고 최적화합니다.
+            컴파일러가 이해하기 가장 유리한 형태의 코드를 작성하여 실행 속도를 향상시키며, 메모리와 하드웨어 자원을 직접 제어하여 상황에 맞는 최적의 구조를 설계합니다.
+          </p>
+        </div>
+
+        <div class="stack-card">
+          <div class="stack-card-header">
+            <span class="stack-name">Python</span>
+          </div>
+          <span class="stack-tagline">Versatility & AI Pipeline</span>
+          <p class="stack-desc">
+            아이디어를 빠르게 구체화하고 확장을 도모하는 도구입니다.
+            기본적인 풀스택 개발 및 AI/ML 파이프라인을 구성하는 역량을 보유하고 있습니다.
+            파이썬의 방대한 생태계를 활용하여 개발 효율성을 높이고, 다양한 라이브러리를 결합해 무궁무진한 소프트웨어 가치를 만들어냅니다.
+          </p>
+        </div>
+
+        <div class="stack-card">
+          <div class="stack-card-header">
+            <span class="stack-name">Docker & Kubernetes</span>
+          </div>
+          <span class="stack-tagline">Infrastructure & Orchestration</span>
+          <p class="stack-desc">
+            완성된 소프트웨어가 어디서든 원활하게 동작하는 환경을 제공합니다.
+            단순한 배포를 넘어, 사용자가 신뢰할 수 있는 안정적인 서비스 환경을 구축합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2024 GYUCHUL. ALL RIGHTS RESERVED.</span>
+  </footer>
+</body>
+</html>
