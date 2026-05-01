@@ -812,6 +812,99 @@
 
     .blog-entry-card:hover .entry-card-line { transform: scaleX(1); }
 
+    .team-cta-section {
+      padding: 0 5rem 10rem;
+      background: #0a0a0a;
+    }
+
+    .team-cta-card {
+      display: block;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 4rem;
+      text-decoration: none;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .team-cta-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 45, 45, 0.08) 0%, rgba(0, 240, 255, 0.08) 100%);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .team-cta-card:hover .team-cta-bg { opacity: 1; }
+    .team-cta-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .team-cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-cta-label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.3em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .team-cta-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .team-cta-title .stroke-text {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent;
+    }
+
+    .team-cta-title .accent-text {
+      color: var(--accent);
+      margin-left: 0.5rem;
+    }
+
+    .team-cta-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .team-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.7);
+      transition: all 0.4s;
+    }
+
+    .team-cta-card:hover .team-cta-btn {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    .team-cta-btn svg { transition: transform 0.3s; }
+    .team-cta-card:hover .team-cta-btn svg { transform: translateX(5px); }
+
     .toast {
       position: fixed;
       bottom: 3rem;
@@ -929,6 +1022,10 @@
       .blog-entry-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .blog-entry-card { padding: 2rem; min-height: 300px; }
       .entry-name { font-size: 3.5rem; }
+
+      .team-cta-section { padding: 0 1.5rem 5rem; }
+      .team-cta-card { padding: 3rem 1.5rem; }
+      .team-cta-title { font-size: 2.5rem; }
 
       .site-footer { padding: 3rem 1.5rem; }
       .footer-nav { gap: 1.5rem; }
@@ -1107,6 +1204,26 @@
         <div class="entry-card-line"></div>
       </a>
     </div>
+  </section>
+
+  <section class="team-cta-section">
+    <a href="/team/story/" class="team-cta-card">
+      <div class="team-cta-bg"></div>
+      <div class="team-cta-content">
+        <span class="team-cta-label">TEAM BLOG</span>
+        <h2 class="team-cta-title">
+          <span class="stroke-text">GYUCHUL</span>
+          <span class="accent-text">TOGETHER</span>
+        </h2>
+        <p class="team-cta-desc">팀이 함께 작성한 스토리 — 마일스톤, 회고, 코딩테스트 기록</p>
+        <span class="team-cta-btn">
+          <span>READ STORIES</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </div>
+    </a>
   </section>
 
   <footer class="site-footer">
