@@ -10,16 +10,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <script>
-    // Catch any /chul/* path that didn't get a static redirect file (e.g. old slug URLs)
-    // and forward to the new external blog. Also catch /blog/*, /team/*, /api/*
-    // (deprecated Notion-driven routes) → redirect to homepage.
+    // Catch deprecated/missing routes:
+    //  - /chul/*       → external personal blog
+    //  - /team/*       → /team/ hub (some old team slugs no longer exist)
+    //  - /blog/*, /gyu/blog/*, /api/*  → home (Notion-driven routes removed)
     (function () {
       var path = window.location.pathname || '';
       if (path.indexOf('/chul') === 0) {
         window.location.replace('https://su9king.github.io/');
         return;
       }
-      if (path.indexOf('/blog') === 0 || path.indexOf('/team') === 0 || path.indexOf('/api') === 0 || path.indexOf('/gyu/blog') === 0) {
+      if (path.indexOf('/team/') === 0) {
+        window.location.replace('/team/');
+        return;
+      }
+      if (path.indexOf('/blog') === 0 || path.indexOf('/api') === 0 || path.indexOf('/gyu/blog') === 0) {
         window.location.replace('/');
         return;
       }
