@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "codingTestProject6",
+    "title": "[코딩테스트 준비] 6회차",
+    "date": "2026-04-11",
+    "summary": "코딩테스트 준비 6회차.",
+    "tags": [
+      "Coding Test"
+    ],
+    "accent": "#f59e0b"
+  },
+  {
+    "slug": "codingTestProject5",
+    "title": "[코딩테스트 준비] 5회차",
+    "date": "2026-04-05",
+    "summary": "코딩테스트 준비 5회차.",
+    "tags": [
+      "Coding Test"
+    ],
+    "accent": "#f59e0b"
+  },
+  {
+    "slug": "codingTestProject4",
+    "title": "[코딩테스트 준비] 4회차",
+    "date": "2026-03-29",
+    "summary": "코딩테스트 준비 4회차.",
+    "tags": [
+      "Coding Test"
+    ],
+    "accent": "#f59e0b"
+  },
+  {
+    "slug": "codingTestProject3",
+    "title": "[코딩테스트 준비] 3회차",
+    "date": "2026-03-22",
+    "summary": "코딩테스트 준비 3회차. with 현우",
+    "tags": [
+      "Coding Test"
+    ],
+    "accent": "#f59e0b"
+  },
+  {
+    "slug": "Gyu2ndAnniversary",
+    "title": "[Gyu의 관점] GyuChul 팀의 2주년을 맞이하여",
+    "date": "2026-03-01",
+    "summary": "2년간의 팀 활동에 대해",
+    "tags": [],
+    "accent": "#7c5cff"
+  }
+]
